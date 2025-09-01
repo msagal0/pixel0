@@ -3,20 +3,22 @@ window.onload = () => {
     const inside = document.getElementById('inside');
     const canvas = document.createElement('canvas');
     const gridColorBox = document.getElementById('gridColorBox');
-    const gridColorEnter = document.getElementById('gridColorEnter');
+    const lineColorBox = document.getElementById('lineColorBox');
+    const drawColorBox = document.getElementById('drawColorBox');
+    const enter = document.getElementById('enter');
     inside.appendChild(canvas);
     const ctx = canvas.getContext("2d");
     canvas.width = 500;
     canvas.height = 500;
-    ctx.fillStyle = "lightblue";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     //Customize grid color
-    gridColorEnter.addEventListener('mousedown', () => {
+    enter.addEventListener('mousedown', () => {
+        ctx.fillStyle = lineColorBox.value;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         for (let x = 0; x < 50; x++) {
             for (let y = 0; y < 50; y++) {
                 drawSquare(x, y, 10, 1, gridColorBox.value);
-            } 
+            }
         }
     })
 
@@ -26,10 +28,14 @@ window.onload = () => {
         ctx.fillRect(x * size, y * size, size - space, size - space);
     }
 
+    //Drawing the lines
+    ctx.fillStyle = "lightblue";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     //Drawing the grid
     for (let x = 0; x < 50; x++) {
         for (let y = 0; y < 50; y++) {
-            drawSquare(x, y, 10, 1, "black");
+            drawSquare(x, y, 10, 1, "white");
         } 
     }
     //mousedown event listener on the canvas to draw
@@ -38,7 +44,7 @@ window.onload = () => {
         function mouseMove (me) {
             let x = Math.floor(me.offsetX / 10);
             let y = Math.floor(me.offsetY / 10);
-            drawSquare(x, y, 10, 1, "green");
+            drawSquare(x, y, 10, 1, drawColorBox.value);
         }
         //Function to stop drawing
         function mouseUp () {
@@ -48,5 +54,5 @@ window.onload = () => {
         //Adding listeners on for mouseup and mousemove
         window.addEventListener('mousemove', mouseMove);
         window.addEventListener('mouseup', mouseUp);
-    }) 
+    })
 }
