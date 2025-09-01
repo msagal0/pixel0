@@ -29,7 +29,7 @@ window.onload = () => {
     }
 
     //Drawing the lines
-    ctx.fillStyle = "lightblue";
+    ctx.fillStyle = lineColorBox.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     //Drawing the grid
