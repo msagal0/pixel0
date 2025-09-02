@@ -5,11 +5,13 @@ window.onload = () => {
     const gridColorBox = document.getElementById('gridColorBox');
     const lineColorBox = document.getElementById('lineColorBox');
     const drawColorBox = document.getElementById('drawColorBox');
+    const defaultButton = document.getElementById('default');
     const enter = document.getElementById('enter');
     inside.appendChild(canvas);
     const ctx = canvas.getContext("2d");
     canvas.width = 500;
     canvas.height = 500;
+    setDefault();
 
     //Customize grid color
     enter.addEventListener('mousedown', () => {
@@ -21,6 +23,21 @@ window.onload = () => {
             }
         }
     })
+
+    function setDefault () {
+        ctx.fillStyle = "#000000";
+        lineColorBox.value = "#000000"
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let x = 0; x < 50; x++) {
+            for (let y = 0; y < 50; y++) {
+                drawSquare(x, y, 10, 1, "#FFFFFF");
+            }
+        }
+        gridColorBox.value = "#FFFFFF"
+    }
+
+    //Default event listener
+    defaultButton.addEventListener('mousedown', setDefault);
 
     //Function to draw squares
     function drawSquare(x, y, size, space, color) {
@@ -35,7 +52,7 @@ window.onload = () => {
     //Drawing the grid
     for (let x = 0; x < 50; x++) {
         for (let y = 0; y < 50; y++) {
-            drawSquare(x, y, 10, 1, "white");
+            drawSquare(x, y, 10, 1, gridColorBox.value);
         } 
     }
     //mousedown event listener on the canvas to draw
