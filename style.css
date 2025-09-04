@@ -19,7 +19,6 @@ canvas {
 #inside {
     width: 100%;
     display: flex;
-    align-items: center;
 }
 .inputLabel {
     font-family: "Jersey 10", sans-serif;
@@ -29,14 +28,14 @@ canvas {
 .enter {
     font-family: "Jersey 10", sans-serif;
     font-size: 20px;
-    margin-top: 5px;
+    margin-top: 7px;
     margin-bottom: 5px;
 }
 .tools {
-    height: 160px;
+    height: 120px;
     border: 1px solid black;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 
     display: flex;
     flex-wrap: wrap;
@@ -45,5 +44,12 @@ canvas {
     column-gap: 20px;
 }
 .margin1 {
-    margin-top: 3px;
+    margin-top: 5px;
+}
+.inputTextBox {
+    width: 100px;
+    height: 20px;
+    margin-top: 10px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 17px;
 }
