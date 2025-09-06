@@ -25,22 +25,22 @@ window.onload = () => {
         everything.push(lineColorBox.value);
         everything.push(gridColorBox.value);
 
-        console.log(everything);
-
         localStorage.setItem(nameBox.value, JSON.stringify(everything));
     }
 
     openButton.onclick = () => {
         try {
-            let coords = JSON.parse(localStorage.getItem(openText.value))[0];
-            ctx.fillStyle = everything[1];
+            let everythingArray = JSON.parse(localStorage.getItem(openText.value));
+            ctx.fillStyle = everythingArray[1];
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            console.log(everythingArray[1]);
+            console.log(everythingArray[2]);
             for (let x = 0; x < 50; x++) {
                 for (let y = 0; y < 50; y++) {
-                    drawSquare(x, y, 10, 1, everything[2]);
+                    drawSquare(x, y, 10, 1, everythingArray[2]);
                 }
             }
-            for (const coord of coords) {
+            for (const coord of everythingArray[0]) {
                 drawSquare(coord[0], coord[1], 10, 1, drawColorBox.value);
             }
         } catch (err) {
