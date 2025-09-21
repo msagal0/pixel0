@@ -3,44 +3,98 @@
     <head>
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
-        <title> Pixel </title>
+        <title> pixel0 </title>
     </head>
     <body>
-            <h1 class="bigText"> Pixel </h1>
+            <h1 class="bigText"> pixel0 </h1>
         <hr>
-        <h1 class="mediumText"> Tools </h1>
-        <div class="tools">
-            <div> 
-                <p class="inputLabel"> Grid Color: </p>
-                <input class="margin1" type="color" id="gridColorBox" value="#FFFFFF">
+        <!-- <h1 class="mediumText"> Tools </h1>
+        <div class="toolsbox">
+            <div class="tools">
+                <div> 
+                    <p class="inputLabel"> Grid Color: </p>
+                    <input class="margin1" type="color" id="gridColorBox" value="#FFFFFF">
+                </div>
+                <div> 
+                    <p class="inputLabel"> Line Color: </p>
+                    <input class="margin1" type="color" id="lineColorBox" value="#8080FF">
+                </div>
+                <div>
+                    <p class="inputLabel"> Length: </p>
+                    <input class="inputTextBox" type="text" id="length" value="50">
+                </div>
+                <button class="enter" id="enter"> Enter </button>
+                <button class="enter" id="default"> Default </button>
+                <div>
+                    <p class="inputLabel"> Draw Color: </p>
+                    <input type="color" id="drawColorBox" value="#000000">
+                </div>
             </div>
-            <div> 
-                <p class="inputLabel"> Line Color: </p>
-                <input class="margin1" type="color" id="lineColorBox" value="#8080FF">
-            </div>
-            <div>
-                <p class="inputLabel"> Length: </p>
-                <input class="inputTextBox" type="text" id="length" value="50">
-            </div>
-            <button class="enter" id="enter"> Enter </button>
-            <button class="enter" id="default"> Default </button>
-            <div>
-                <p class="inputLabel"> Draw Color: </p>
-                <input type="color" id="drawColorBox" value="#000000">
-            </div>
-            <div>
-                <p class="inputLabel"> Name: </p>
-                <input class="inputTextBox" type="text" id="nameBox" value="Untitled">
-            </div>
-            <button class="enter" id="save"> Save (PF) </button>
-            <div>
-                <p class="inputLabel"> Open (PF): </p>
-                <input class="inputTextBox" type="text" id="openText" value="">
-            </div>
-            <button class="enter" id="openButton"> Open (PF) </button>
-            <button class="enter" id="pngExportButton"> Export (PNG) </button>
         </div>
-        <div id="inside">
+        <div>
+            <p class="inputLabel"> Name: </p>
+            <input class="inputTextBox" type="text" id="nameBox" value="Untitled">
+        </div>
+        <button class="enter" id="save"> Save (PF) </button>
+        <div>
+            <p class="inputLabel"> Open (PF): </p>
+            <input class="inputTextBox" type="text" id="openText" value="">
+        </div>
+        <button class="enter" id="openButton"> Open (PF) </button>
+        <button class="enter" id="pngExportButton"> Export (PNG) </button> -->
+        <div id="main">
+            <div id="left">
+                <h1 class="mediumText centeredText"> Colors </h1>
+                <div id="leftBox">
+                    <div>
+                        <p class="inputLabel"> Draw Color: </p>
+                        <input class="margin1" type="color" id="drawColorBox" value="#000000">
+                    </div>
+                </div>
+            </div>
+            <div id="middle">
+                <div id="drawing"></div>
+                <div id="fileControls">
+                    <div class="column">
+                        <div>
+                            <p class="inputLabel"> Name: </p>
+                            <input class="inputTextBox" type="text" id="nameBox" value="Untitled">
+                        </div>
+                        <button class="enter" id="save"> Save (PF) </button>
+                    </div>
+                    <div class="column">
+                        <div>
+                            <p class="inputLabel"> Open (PF): </p>
+                            <input class="inputTextBox" type="text" id="openText" value="">
+                        </div>
+                        <button class="enter" id="openButton"> Open (PF) </button>
+                    </div>
+                    <div class="column">
+                        <button class="enter" id="pngExportButton"> Export (PNG) </button>
+                    </div>
+                </div>
+                <h1 class="mediumText centeredText"> Save / Open </h1>
+            </div>
+            <div id="right">
+            <h1 class="mediumText centeredText"> Customization </h1>
+                <div id="rightBox">
+                    <div> 
+                        <p class="inputLabel"> Grid Color: </p>
+                        <input class="margin1" type="color" id="gridColorBox" value="#FFFFFF">
+                    </div>
+                    <div> 
+                        <p class="inputLabel"> Line Color: </p>
+                        <input class="margin1" type="color" id="lineColorBox" value="#8080FF">
+                    </div>
+                    <div>
+                        <p class="inputLabel"> Length: </p>
+                        <input class="inputTextBox" type="text" id="length" value="50">
+                    </div>
+                    <button class="enter" id="enter"> Enter </button>
+                    <button class="enter" id="default"> Default </button>
+                    <div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

@@ -16,7 +16,7 @@
 canvas {
     margin: auto;
 }
-#inside {
+#main {
     width: 100%;
     display: flex;
 }
@@ -29,20 +29,9 @@ canvas {
     font-family: "Jersey 10", sans-serif;
     font-size: 20px;
     margin-top: 7px;
-    margin-bottom: 5px;
-}
-.tools {
-    height: 120px;
-    border: 1px solid black;
-    padding: 5px;
-    margin-bottom: 5px;
-
-    display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    align-content: flex-start;
-    column-gap: 20px;
 }
+
 .margin1 {
     margin-top: 5px;
 }
@@ -52,4 +41,55 @@ canvas {
     margin-top: 10px;
     font-family: "Jersey 10", sans-serif;
     font-size: 17px;
+}
+body {
+    background-color: #2d2d2d;
+    color: white;
+}
+#leftBox, #rightBox {
+    width: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 1px solid rgb(215, 215, 215);
+    padding: 5px;
+}
+#middle {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+}
+#fileControls {
+    border-radius: 15px;
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid rgb(215, 215, 215);
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    column-gap: 5px;
+    align-self: center;
+}
+#drawing {
+    flex: auto;
+    margin: 10px;
+    align-self: center;
+}
+#right {
+    display: flex;
+    flex-direction: column;
+}
+#left {
+    display: flex;
+    flex-direction: column;
+}
+.centeredText {
+    text-align: center;
+}
+.column {
+    width: 200px;
+    flex-direction: column;
+    display: flex;
 }

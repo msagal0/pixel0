@@ -1,7 +1,6 @@
 window.onload = () => {
-    //Setting up
-    const inside = document.getElementById('inside');
-    const canvas = document.createElement('canvas');
+    //getting HTML elements
+    const drawing = document.getElementById('drawing');
     const gridColorBox = document.getElementById('gridColorBox');
     const lineColorBox = document.getElementById('lineColorBox');
     const drawColorBox = document.getElementById('drawColorBox');
@@ -13,15 +12,26 @@ window.onload = () => {
     const openButton = document.getElementById('openButton');
     const lengthText = document.getElementById('length');
     const pngExportButton = document.getElementById('pngExportButton');
-    inside.appendChild(canvas);
+    //creating canvas in which user will draw on and storing context in ctx
+    const canvas = document.createElement('canvas');
+    drawing.appendChild(canvas);
     const ctx = canvas.getContext("2d");
+
+    //setting the canvas size
     canvas.width = 500;
     canvas.height = 500;
-    setDefault();
-    let currentSquares = [];
-    let everything = [];
-    let lengthValue = lengthText.value;
+
+    let currentSquares = []; //making a variable for the program to remember what squares are on the screen
+    let lengthValue = 50; //making a variable that holds the width and height of the grid (i.e 3 x 3 or 50 x 50)
+
+    setDefault(); //calling a function to set the default "Grid Color" and "Line Color"
+
+    //PixelFormat variables
     let currentPF;
+
+    class ExportImport {
+        
+    }
 
     pngExportButton.onclick = () => {
         const a = document.createElement('a');
@@ -31,27 +41,27 @@ window.onload = () => {
     }
 
     saveButton.onclick = () => {
-        everything = [];
-        everything.push(currentSquares);
-        everything.push(lineColorBox.value);
-        everything.push(gridColorBox.value);
+        currentPF = [];
+        currentPF.push(currentSquares);
+        currentPF.push(lineColorBox.value);
+        currentPF.push(gridColorBox.value);
 
-        localStorage.setItem(nameBox.value, JSON.stringify(everything));
+        localStorage.setItem(nameBox.value, JSON.stringify(currentPF));
     }
 
     openButton.onclick = () => {
         try {
-            let everythingArray = JSON.parse(localStorage.getItem(openText.value));
-            ctx.fillStyle = everythingArray[1];
+            let currentPFArray = JSON.parse(localStorage.getItem(openText.value));
+            ctx.fillStyle = currentPFArray[1];
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            console.log(everythingArray[1]);
-            console.log(everythingArray[2]);
+            console.log(currentPFArray[1]);
+            console.log(currentPFArray[2]);
             for (let x = 0; x < 50; x++) {
                 for (let y = 0; y < 50; y++) {
-                    drawSquare(x, y, 10, 1, everythingArray[2]);
+                    drawSquare(x, y, 10, 1, currentPFArray[2]);
                 }
             }
-            for (const coord of everythingArray[0]) {
+            for (const coord of currentPFArray[0]) {
                 drawSquare(coord[0], coord[1], 10, 1, drawColorBox.value);
             }
         } catch (err) {
@@ -68,17 +78,18 @@ window.onload = () => {
         //console.log(currentPF);
 
         lengthValue = lengthText.value;
+        const size = Math.floor(canvas.width / lengthValue);
         makeBorder(lineColorBox.value, 1);
         ctx.fillStyle = lineColorBox.value;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         for (let x = 0; x < lengthValue; x++) {
             for (let y = 0; y < lengthValue; y++) {
-                drawSquare(x, y, canvas.width / lengthValue, 1, gridColorBox.value);
+                drawSquare(x, y, size, 1, gridColorBox.value);
             }
         }
         try {
             for (const coord of currentPF[0]) {
-                drawSquare(coord[0], coord[1], canvas.width / lengthValue, 1, drawColorBox.value);
+                drawSquare(coord[0], coord[1], size, 1, coord[2]);
             }
         } catch(err) {
             console.log("Error2:", err.name);
@@ -106,8 +117,12 @@ window.onload = () => {
     //Default event listener
     defaultButton.addEventListener('mousedown', setDefault);
 
+
+    //Function to check if a coordinate is in a list
     function coordInList(coord, list) {
-        return list.find((elem) => (elem[0] === coord[0] && elem[1] === coord[1]));
+        const arrayToFind = list.find((elem) => (elem[0] === coord[0] && elem[1] === coord[1]));
+        const index = list.findIndex(element => element === arrayToFind);
+        return index;
     }
 
     //Function to draw squares
@@ -126,15 +141,20 @@ window.onload = () => {
             drawSquare(x, y, 10, 1, gridColorBox.value);
         }
     }
-    //mousedown event listener on the canvas to draw
+
+
+
+    /////////////////////////
+    // DRAW EVENT LISTENER //
+    /////////////////////////
     canvas.addEventListener('mousedown', () => {
         //Function to draw while mouse is moving
         function mouseMove (me) {
             const x = Math.floor(me.offsetX / (canvas.width / lengthValue));
             const y = Math.floor(me.offsetY / (canvas.width / lengthValue));
             drawSquare(x, y, canvas.width / lengthValue, 1, drawColorBox.value);
-            if (!(coordInList([x, y], currentSquares))) {
-                currentSquares.push([x, y]);
+            if (coordInList([x, y], currentSquares) === -1) {
+                currentSquares.push([x, y, drawColorBox.value]);
                 //console.log([x, y] in currentSquares);
             }
         }
@@ -146,5 +166,32 @@ window.onload = () => {
         //Adding listeners on for mouseup and mousemove
         window.addEventListener('mousemove', mouseMove);
         window.addEventListener('mouseup', mouseUp);
+    })
+
+
+
+    //////////////////////////
+    // ERASE EVENT LISTENER //
+    //////////////////////////
+    canvas.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        function mouseDownErase (me) {
+            const x = Math.floor(me.offsetX / (canvas.width / lengthValue));
+            const y = Math.floor(me.offsetY / (canvas.width / lengthValue));
+            drawSquare(x, y, canvas.width / lengthValue, 1, gridColorBox.value);
+            if (coordInList([x, y], currentSquares)) {
+                const index = coordInList([x, y], currentSquares);
+                if (index != -1) {
+                    currentSquares.splice(index, 1);
+                }
+                //console.log([x, y] in currentSquares);
+            }
+        }
+        function mouseUpErase () {
+            window.removeEventListener('mousemove', mouseDownErase);
+            window.removeEventListener('mouseup', mouseUpErase);
+        }
+        window.addEventListener('mousemove', mouseDownErase);
+        window.addEventListener('mouseup', mouseUpErase);
     })
 }
