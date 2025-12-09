@@ -1,7 +1,7 @@
 
 # pixel0
 
-pixel0 is an open-source pixel art editor still in progress.
+pixel0 is an open-source web-app pixel art editor.
 
 Here is how to use pixel0.
 
